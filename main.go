@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/kardianos/service"
+	"sync"
 	"time"
 )
 
@@ -23,6 +24,17 @@ func (p program) Stop(s service.Service) error {
 }
 
 func (p program) run() {
+
+	for serviceIsRunning {
+		writingSync.Lock()
+		programIsRunning = true
+		writingSync.Unlock()
+		fmt.Println("Service is running")
+		time.Sleep(2 * time.Second)
+		writingSync.Lock()
+		programIsRunning = false
+		writingSync.Unlock()
+
 	for {
 		fmt.Println("Service is running")
 		time.Sleep(1 * time.Second)
