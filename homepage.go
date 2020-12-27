@@ -39,7 +39,7 @@ func getTime(writer http.ResponseWriter, request *http.Request, params httproute
 		return
 	}
 	fmt.Println(data.Name)
-	fmt.Println(data.Name)
+	fmt.Println(data.Time)
 	timer := time.Now()
 	time.Sleep(1 * time.Second)
 	end := time.Since(timer)
