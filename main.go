@@ -50,9 +50,10 @@ func (p program) run() {
 	router.ServeFiles("/css/*filepath", http.Dir("css"))
 	router.GET("/", serveHomepage)
 
+	router.POST("/get_time", getTime)
+
 	router.Handler("GET", "/time", timer)
 	go streamTime(timer)
-
 	err := http.ListenAndServe(":82", router)
 	if err != nil {
 		fmt.Println("Problem starting web server: " + err.Error())
