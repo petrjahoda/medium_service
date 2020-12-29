@@ -44,14 +44,15 @@ func (p program) Stop(s service.Service) error {
 }
 
 func (p program) run() {
+	logDirectoryCheck()
+	go deleteOldLogFiles(48 * time.Hour)
+	logInfo("RUN", "Program is running")
 	router := httprouter.New()
 	timer := sse.New()
 	router.ServeFiles("/js/*filepath", http.Dir("js"))
 	router.ServeFiles("/css/*filepath", http.Dir("css"))
 	router.GET("/", serveHomepage)
-
 	router.POST("/get_time", getTime)
-
 	router.Handler("GET", "/time", timer)
 	go streamTime(timer)
 	err := http.ListenAndServe(":82", router)

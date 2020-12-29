@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"github.com/julienschmidt/sse"
 	"html/template"
@@ -27,34 +26,34 @@ type TimeDataOutput struct {
 }
 
 func getTime(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	logInfo("MAIN", "Get time function called from "+request.RemoteAddr)
+	timer := time.Now()
 	var data TimeDataInput
 	err := json.NewDecoder(request.Body).Decode(&data)
 	if err != nil {
-		fmt.Println(err.Error())
+		logError("MAIN", "Problem decoding data: "+err.Error())
 		var responseData TimeDataOutput
 		responseData.Result = "nok"
 		responseData.Text = "problem with user json data"
 		writer.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(writer).Encode(responseData)
+		logInfo("MAIN", "Get time function ended in "+time.Since(timer).String())
 		return
 	}
-	fmt.Println(data.Name)
-	fmt.Println(data.Time)
-	timer := time.Now()
-	time.Sleep(1 * time.Second)
-	end := time.Since(timer)
-	fmt.Println("processing takes: " + end.String())
 	var responseData TimeDataOutput
 	responseData.Result = "ok"
 	responseData.Text = "everything went smooth"
 	responseData.Time = time.Now().Format("02/01/2006, 15:04:05")
-	responseData.Duration = end.String()
+	responseData.Duration = time.Since(timer).String()
 	writer.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(writer).Encode(responseData)
+	logInfo("MAIN", "Get time function ended in "+time.Since(timer).String())
 	return
 }
 
 func serveHomepage(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	logInfo("MAIN", "Serving homepage to the user")
+	timer := time.Now()
 	writingSync.Lock()
 	programIsRunning = true
 	writingSync.Unlock()
@@ -65,10 +64,11 @@ func serveHomepage(writer http.ResponseWriter, request *http.Request, params htt
 	writingSync.Lock()
 	programIsRunning = false
 	writingSync.Unlock()
+	logInfo("MAIN", "Homepage served in "+time.Since(timer).String())
 }
 
 func streamTime(timer *sse.Streamer) {
-	fmt.Println("Streaming time started")
+	logInfo("MAIN", "Streaming time started")
 	for serviceIsRunning {
 		timer.SendString("", "time", time.Now().Format("02/01/2006, 15:04:05"))
 		time.Sleep(1 * time.Second)

@@ -1,0 +1,47 @@
+2020-12-29 09:27:57.507 MAIN INF Streaming time started
+2020-12-29 09:31:12.840 MAIN INF Streaming time started
+2020-12-29 09:31:17.383 MAIN INF Serving homepage to the user
+2020-12-29 09:31:17.384 MAIN INF Homepage served in 591.19µs
+2020-12-29 09:34:09.782 MAIN INF Streaming time started
+2020-12-29 09:34:14.101 MAIN INF Get time function called
+2020-12-29 09:34:14.101 MAIN INF Get time function ended in 129.269µs
+2020-12-29 09:34:29.262 MAIN INF Get time function called
+2020-12-29 09:34:29.262 MAIN INF Get time function ended in 56.857µs
+2020-12-29 09:34:30.064 MAIN INF Get time function called
+2020-12-29 09:34:30.064 MAIN INF Get time function ended in 63.473µs
+2020-12-29 09:34:30.694 MAIN INF Get time function called
+2020-12-29 09:34:30.694 MAIN INF Get time function ended in 32.946µs
+2020-12-29 09:34:31.361 MAIN INF Get time function called
+2020-12-29 09:34:31.361 MAIN INF Get time function ended in 48.298µs
+2020-12-29 09:34:31.959 MAIN INF Get time function called
+2020-12-29 09:34:31.959 MAIN INF Get time function ended in 41.749µs
+2020-12-29 09:34:32.573 MAIN INF Get time function called
+2020-12-29 09:34:32.573 MAIN INF Get time function ended in 84.782µs
+2020-12-29 09:34:32.881 MAIN INF Get time function called
+2020-12-29 09:34:32.881 MAIN INF Get time function ended in 37.076µs
+2020-12-29 09:34:33.090 MAIN INF Get time function called
+2020-12-29 09:34:33.090 MAIN INF Get time function ended in 44.162µs
+2020-12-29 09:34:33.269 MAIN INF Get time function called
+2020-12-29 09:34:33.270 MAIN INF Get time function ended in 107.016µs
+2020-12-29 09:34:33.439 MAIN INF Get time function called
+2020-12-29 09:34:33.439 MAIN INF Get time function ended in 117.265µs
+2020-12-29 09:34:33.615 MAIN INF Get time function called
+2020-12-29 09:34:33.615 MAIN INF Get time function ended in 192.957µs
+2020-12-29 09:40:25.732 MAIN INF Streaming time started
+2020-12-29 09:40:29.230 MAIN INF Get time function called from [
+2020-12-29 09:40:29.230 MAIN INF Get time function ended in 261.013µs
+2020-12-29 09:40:56.942 MAIN INF Streaming time started
+2020-12-29 09:41:00.562 MAIN INF Get time function called from [::1]:57133
+2020-12-29 09:41:00.562 MAIN INF Get time function ended in 175.147µs
+2020-12-29 09:41:37.138 MAIN INF Serving homepage to the user
+2020-12-29 09:41:37.139 MAIN INF Homepage served in 1.037323ms
+2020-12-29 09:41:39.068 MAIN INF Get time function called from 192.168.86.21:62587
+2020-12-29 09:41:39.069 MAIN INF Get time function ended in 66.111µs
+2020-12-29 09:53:51.498 MAIN INF Streaming time started
+2020-12-29 09:54:04.535 MAIN INF Streaming time started
+2020-12-29 09:54:58.484 MAIN INF MAIN 2020-12-29.log
+2020-12-29 09:54:58.484 MAIN INF RUN 2020-12-29.log
+2020-12-29 09:54:58.484 MAIN INF Streaming time started
+2020-12-29 09:55:29.822 MAIN INF 2020-12-29 09:54:58.484513779 +0100 CET
+2020-12-29 09:55:29.822 MAIN INF 2020-12-29 09:54:58.484361239 +0100 CET
+2020-12-29 09:55:29.822 MAIN INF Streaming time started
