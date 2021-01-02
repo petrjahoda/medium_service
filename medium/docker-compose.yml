@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+
+  medium_database:
+    networks:
+      - medium
+    container_name: medium_database
+    image: 'postgres:alpine'
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: '10'
+    volumes:
+      - 'db:/var/lib/postgresql/data'
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=Medium
+  medium_service:
+    networks:
+      - medium
+    container_name: medium_service
+    image: 'petrjahoda/medium_service:latest'
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '10'
+    depends_on:
+      - medium_database
+    ports:
+      - '90:81'
+    restart: always
+
+volumes:
+  db: null
+
+networks:
+  medium: null

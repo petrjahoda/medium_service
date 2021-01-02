@@ -55,7 +55,8 @@ func (p program) run() {
 	router.POST("/get_time", getTime)
 	router.Handler("GET", "/time", timer)
 	go streamTime(timer)
-	err := http.ListenAndServe(":82", router)
+	go checkDatabase()
+	err := http.ListenAndServe(":81", router)
 	if err != nil {
 		fmt.Println("Problem starting web server: " + err.Error())
 		os.Exit(-1)
