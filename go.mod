@@ -5,6 +5,7 @@ go 1.15
 require (
 	github.com/gofrs/uuid v4.0.0+incompatible // indirect
 	github.com/jackc/pgmock v0.0.0-20201204152224-4fe30f7445fd // indirect
+	github.com/jackc/pgproto3/v2 v2.0.7 // indirect
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/julienschmidt/sse v0.0.0-20190921213156-72db694fe9e6
 	github.com/kardianos/service v1.2.0

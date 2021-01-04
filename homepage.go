@@ -4,8 +4,11 @@ import (
 	"encoding/json"
 	"github.com/julienschmidt/httprouter"
 	"github.com/julienschmidt/sse"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 	"html/template"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -23,6 +26,7 @@ type TimeDataOutput struct {
 	Text     string
 	Time     string
 	Duration string
+	Records  []ButtonRecords
 }
 
 func getTime(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
@@ -40,15 +44,37 @@ func getTime(writer http.ResponseWriter, request *http.Request, params httproute
 		logInfo("MAIN", "Get time function ended in "+time.Since(timer).String())
 		return
 	}
+
+	mediumDb, err := gorm.Open(postgres.Open(mediumConfig), &gorm.Config{})
+	mediumSqlDB, _ := mediumDb.DB()
+	defer mediumSqlDB.Close()
+	if err != nil {
+		logError("MAIN", "Cannot open medium database:"+err.Error())
+		var responseData TimeDataOutput
+		responseData.Result = "nok"
+		responseData.Text = "problem opening medium database"
+		writer.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(writer).Encode(responseData)
+		logInfo("MAIN", "Get time function ended in "+time.Since(timer).String())
+		return
+
+	}
+
+	record := ButtonRecords{Name: data.Name, Time: time.Now()}
+	mediumDb.Save(&record)
+
+	var records []ButtonRecords
+	mediumDb.Find(&records)
+	logInfo("MAIN", "Found "+strconv.Itoa(len(records))+" records")
+
 	var responseData TimeDataOutput
 	responseData.Result = "ok"
-	responseData.Text = "everything went smooth"
-	responseData.Time = time.Now().Format("02/01/2006, 15:04:05")
-	responseData.Duration = time.Since(timer).String()
+	responseData.Text = "data successfully read from database"
+	responseData.Records = records
 	writer.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(writer).Encode(responseData)
 	logInfo("MAIN", "Get time function ended in "+time.Since(timer).String())
-	return
+
 }
 
 func serveHomepage(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {

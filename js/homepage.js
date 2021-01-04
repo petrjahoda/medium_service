@@ -3,7 +3,7 @@ const buttonTime = document.getElementById("button-time")
 const name = document.getElementById("name")
 const askButton = document.getElementById("ask-button")
 const askTime = document.getElementById("ask-time")
-
+const table = document.getElementById("table")
 
 askButton.addEventListener("click", function () {
     let data = {
@@ -20,8 +20,14 @@ askButton.addEventListener("click", function () {
     }).then((response) => {
         response.text().then(function (data) {
             let result = JSON.parse(data);
-            console.log(result)
-            askTime.textContent = "Backend processing took " + result["Duration"] + " and ended at " + result["Time"]
+            let tableData = ""
+            for (let record of result["Records"]) {
+                tableData += "<tr>";
+                tableData += "<td>" + record["CreatedAt"] + "</td>" + "<td>" + record["Name"] + "</td>";
+                tableData += "</tr>";
+            }
+            table.innerHTML = tableData
+            askTime.textContent = "Number of records:" + result["Records"].length
         });
     }).catch((error) => {
         console.log(error)
